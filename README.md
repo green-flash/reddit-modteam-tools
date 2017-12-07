@@ -1,3 +1,3 @@
-# reddit-mod-tools
+# reddit-modteam-tools
 
-A collection of tools that make moderating big subreddits a bit easier
+A collection of server-side tools that make moderating reddit in large mod teams a bit easier for everyone
