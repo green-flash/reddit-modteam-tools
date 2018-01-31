@@ -135,7 +135,9 @@ def process_rule_violation_report(item, subreddit, users, constants, submission_
 
             if is_submission_report and not is_vile_report(report_reason, reporter_name):
                 submission = r.submission(id=item.id)
-                subreddit.flair.set(submission, text=rule_linkflair_mapping[report_reason], css_class=REMOVAL_FLAIR_CSS_CLASS)
+                subreddit.flair.set(submission,
+                                    text=rule_linkflair_mapping[report_reason],
+                                    css_class=REMOVAL_FLAIR_CSS_CLASS)
 
             post_id = item.id if is_submission_report else item.link_id[3:]
             comment_id = None if is_submission_report else item.id
