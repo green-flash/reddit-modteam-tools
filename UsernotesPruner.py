@@ -6,7 +6,7 @@ import praw
 import usernotes
 
 
-def is_ban_note(user_note):
+def is_ban_related_note(user_note):
     return 'ban' in user_note['n'].lower()
 
 
@@ -16,7 +16,7 @@ def prune_very_old_notes(username, entry, cutoff_days):
         age_of_user_note = usernotes.get_age_of_user_note(user_note)
         note_prunable = False
         if age_of_user_note.days > cutoff_days:
-            if not is_ban_note(user_note):
+            if not is_ban_related_note(user_note):
                 logging.info('pruned very old note from {0} days ago for /u/{1}\t{2}'.format(
                     age_of_user_note.days, username, user_note['n'].encode('UTF-8', 'ignore')))
                 note_prunable = True
@@ -35,7 +35,7 @@ def check_user_prunable(username, entry, cutoff_days):
     elif len(user_notes) == 1:
         only_user_note = user_notes[0]
         age_of_only_user_note = usernotes.get_age_of_user_note(only_user_note)
-        if age_of_only_user_note.days > cutoff_days and not is_ban_note(only_user_note):
+        if age_of_only_user_note.days > cutoff_days and not is_ban_related_note(only_user_note):
             logging.info('pruned only user note from {0} days ago for /u/{1}\t{2}'.format(
                 age_of_only_user_note.days, username, only_user_note['n'].encode('UTF-8', 'ignore')))
             return True
